@@ -1,0 +1,13 @@
+package com.salbiyath.authservice.repository;
+
+import com.salbiyath.authservice.entity.UserCredential;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.Optional;
+
+public interface UserCredentialRepository extends JpaRepository<UserCredential, Integer> {
+
+    Optional<UserCredential> findUserCredentialByUsername(String username);
+
+
+}

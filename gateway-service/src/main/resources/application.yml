@@ -1,0 +1,48 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: create-student-app
+          uri: lb://CREATE-STUDENT-SERVICE
+          predicates:
+            - Path=/api/v1/**
+            - Method=POST
+          filters:
+            - AuthenticationFilter
+
+        - id: update-student-app
+          uri: lb://UPDATE-STUDENT-SERVICE
+          predicates:
+            - Path=/api/v1/**
+            - Method=PUT
+          filters:
+            - AuthenticationFilter
+
+        - id: get-student-app
+          uri: lb://GET-STUDENT-SERVICE
+          predicates:
+            - Path=/api/v1/**
+            - Method=GET
+          filters:
+            - AuthenticationFilter
+
+        - id: delete-student-app
+          uri: lb://DELETE-STUDENT-SERVICE
+          predicates:
+            - Path=/api/v1/**
+            - Method=DELETE
+          filters:
+            - AuthenticationFilter
+
+        - id: auth-service
+          uri: lb://AUTH-SERVICE
+          predicates:
+            - Path=/auth/**
+
+  application:
+    name: GATEWAY-SERVICE
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
